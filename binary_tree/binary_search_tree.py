@@ -15,11 +15,13 @@ class TreeNode:
     def get_right_child(self):
         return self.right
 
-    def insert_left(self, val):
-        self.left = TreeNode(val, parent=self)
+    def insert_left(self, node):
+        self.left = node
+        node.parent = self
 
-    def insert_right(self, val):
-        self.right = TreeNode(val, parent=self)
+    def insert_right(self, node):
+        self.right = node
+        node.parent = self
 
     def is_left_child(self):
         return self.parent and self.parent.left == self
@@ -67,24 +69,21 @@ class BinarySearchTree:
 
     def insert(self, val):
         if self.root:
-            self.insert_node(val, self.root)
-            self.size = self.size + 1
+            self.insert_node(TreeNode(val), self.root)
         else:
             self.root = TreeNode(val)
-            self.size = self.size + 1
-        return self.size
 
-    def insert_node(self, val, current_node):
-        if val <= current_node.get_val():
-            if current_node.get_left_child():
-                self.insert_node(val, current_node.get_left_child())
+    def insert_node(self, new_node, current_node):
+        if new_node.val <= current_node.val:
+            if current_node.left:
+                self.insert_node(new_node, current_node.left)
             else:
-                current_node.insert_left(val)
+                current_node.insert_left(new_node)
         else:
             if current_node.get_right_child():
-                self.insert_node(val, current_node.get_right_child())
+                self.insert_node(new_node, current_node.right)
             else:
-                current_node.insert_right(val)
+                current_node.insert_right(new_node)
 
     def inorder(self):
         return self.print_inorder(self.root)
@@ -142,20 +141,21 @@ class BinarySearchTree:
             tree_list += self.tree_to_list(node.right)
         return tree_list
 
-    def delete(self, val):
-        node_to_remove = self.search(val)
-        tree_list = self.tree_to_list(node_to_remove)
-        if node_to_remove.is_left_child():
-            node_to_remove.parent.left = None
-        elif node_to_remove.is_right_child():
-            node_to_remove.parent.right = None
+    def delete(self, node):
+        if node.is_left_child():
+            node.parent.left = None
+        elif node.is_right_child():
+            node.parent.right = None
         else:
             self.root = None
-        node_to_remove.parent = None
-        node_to_remove.left = None
-        node_to_remove.right = None
-        for i in range(1, len(tree_list)):
-            self.insert(tree_list[i])
+        if node.left:
+            self.insert(node.left.val)
+        if node.right:
+            self.insert(node.right.val)
+
+        node.parent = None
+        node.left = None
+        node.right = None
 
 
 mytree = BinarySearchTree()
@@ -165,26 +165,17 @@ mytree.insert(5)
 mytree.insert(11)
 mytree.insert(12)
 mytree.insert(3)
-mytree.insert(0)
-mytree.insert(4)
+mytree.insert(10)
+mytree.insert(6)
 
-
-# mytree.inorder()
-
-# mytree.root
-
-print(mytree.tree_to_list(mytree.root))
-print(mytree.tree_to_list(mytree.root))
-
-# mytree.inorder()
-
+mytree.inorder()
+#
 mytree.delete(5)
-
-
-
+#
 print('new tree')
+#
+mytree.inorder()
 
-# mytree.inorder()
 
-print(mytree.tree_to_list(mytree.root))
-
+# print(mytree.root.left.val)
+# print(mytree.root.right.val)
