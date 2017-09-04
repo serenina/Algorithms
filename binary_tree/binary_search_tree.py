@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+
+
 class TreeNode:
     def __init__(self, val, left=None, right=None, parent=None):
         self.val = val
@@ -71,19 +74,3 @@ class BinarySearchTree:
             else:
                 currentNode.rightChild = TreeNode(val, parent = currentNode)
 
-    def search(self, data):
-        if self.root.val == data:
-            return self.root
-        elif:
-            if data < self.root:
-                return self.root.left.search(data)
-            else:
-                return self.root.right.search(data)
-        else:
-            print (data, 'not found')
-
-
-
-
-    def delete(self, val):
-        if self.root == val:
