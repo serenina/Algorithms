@@ -22,21 +22,8 @@ class BinarySearchTree:
         self.size = 0
         self.tree_list = []
 
-    def length(self):
-        return self.size
-
-    def __len__(self):
-        return self.size
-
-    def __iter__(self):
-        return self.root.__iter__()
-
     def insert_value(self, value):
-        if self.root:
-            return self.insert_node(TreeNode(value), self.root)
-        else:
-            self.root = TreeNode(value)
-            return self.root
+        return self.insert_node(TreeNode(value), self.root)
 
     def insert_node(self, new_node, current_node=None):
         if self.root is None:
@@ -93,17 +80,17 @@ class BinarySearchTree:
     def search_helper(self, node, val):
         if val == node.val:
             return node.val
-        else:
-            if val <= node.val:
-                if node.left is None:
-                    print(val, 'not found')
-                else:
-                    return self.search_helper(node.left, val)
-            elif val > node.val:
-                if node.right is None:
-                    print(val, 'not found')
-                else:
-                    return self.search_helper(node.right, val)
+
+        if val <= node.val:
+            if node.left is None:
+                print(val, 'not found')
+            else:
+                return self.search_helper(node.left, val)
+        elif val > node.val:
+            if node.right is None:
+                print(val, 'not found')
+            else:
+                return self.search_helper(node.right, val)
 
     def delete(self, node):
         if node.parent is None:
