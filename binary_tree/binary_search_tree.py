@@ -1,4 +1,9 @@
 #!/usr/bin/env python/
+class ValNotFoundException(Exception):
+    def __init__(self, val):
+        self.val = val
+
+
 class TreeNode:
     def __init__(self, val, left=None, right=None, parent=None):
         self.val = val
@@ -83,12 +88,12 @@ class BinarySearchTree:
 
         if val <= node.val:
             if node.left is None:
-                print(val, 'not found')
+                raise ValNotFoundException(val)
             else:
                 return self.search_helper(node.left, val)
         elif val > node.val:
             if node.right is None:
-                print(val, 'not found')
+                raise ValNotFoundException(val)
             else:
                 return self.search_helper(node.right, val)
 

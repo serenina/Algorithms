@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-# import pytest
-from binary_tree.binary_search_tree import BinarySearchTree
+import pytest
+from binary_tree.binary_search_tree import (BinarySearchTree,
+                                            ValNotFoundException)
 
 
 class TestBinarySearchTree(object):
@@ -12,6 +13,22 @@ class TestBinarySearchTree(object):
         expected_result = 'b'
 
         assert b.search('b') == expected_result
+
+    def test_search_value(self):
+        b = BinarySearchTree()
+        b.insert_value(10)
+        b.insert_value(5)
+        b.insert_value(11)
+        b.insert_value(12)
+
+        value_present = 10
+        value_not_present = 42
+
+        assert b.search(value_present) == value_present
+
+        with pytest.raises(ValNotFoundException) as ex:
+            b.search(value_not_present)
+        assert ex.value.val == value_not_present
 
     def test_insert(self):
         b = BinarySearchTree()
@@ -62,7 +79,7 @@ class TestBinarySearchTree(object):
 
         expected_result = [5, 3, 10, 6, 11, 12]
         assert b.tree_to_list(b.root) == expected_result
-    #
+
     def test_remove_internal_node(self):
         b = BinarySearchTree()
 
