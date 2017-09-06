@@ -31,7 +31,14 @@ class BinarySearchTree:
     def __iter__(self):
         return self.root.__iter__()
 
-    def insert(self, new_node, current_node=None):
+    def insert_value(self, value):
+        if self.root:
+            return self.insert_node(TreeNode(value), self.root)
+        else:
+            self.root = TreeNode(value)
+            return self.root
+
+    def insert_node(self, new_node, current_node=None):
         if self.root is None:
             self.root = new_node
             return self.root
@@ -41,12 +48,12 @@ class BinarySearchTree:
 
         if new_node.val <= current_node.val:
             if current_node.left:
-                self.insert(new_node, current_node.left)
+                self.insert_node(new_node, current_node.left)
             else:
                 current_node.insert_left(new_node)
         else:
             if current_node.right:
-                self.insert(new_node, current_node.right)
+                self.insert_node(new_node, current_node.right)
             else:
                 current_node.insert_right(new_node)
 
@@ -58,7 +65,7 @@ class BinarySearchTree:
     def print_inorder(self, new_node):
         if new_node.left:
             self.print_inorder(new_node.left)
-        print(new_node.get_val())
+        print(new_node.val)
         if new_node.right:
             self.print_inorder(new_node.right)
 
@@ -84,15 +91,15 @@ class BinarySearchTree:
         return self.search_helper(self.root, val)
 
     def search_helper(self, node, val):
-        if val == node.get_val():
-            return node
+        if val == node.val:
+            return node.val
         else:
-            if val <= node.get_val():
+            if val <= node.val:
                 if node.left is None:
                     print(val, 'not found')
                 else:
                     return self.search_helper(node.left, val)
-            elif val > node.get_val():
+            elif val > node.val:
                 if node.right is None:
                     print(val, 'not found')
                 else:
@@ -102,16 +109,16 @@ class BinarySearchTree:
         if node.parent is None:
             self.root = None
         else:
-            if node.parent.left == node:
+            if node.parent.left is node:
                 node.parent.left = None
-            elif node.parent.right == node:
+            elif node.parent.right is node:
                 node.parent.right = None
 
         if node.left:
-            self.insert(node.left)
+            self.insert_node(node.left)
 
         if node.right:
-            self.insert(node.right)
+            self.insert_node(node.right)
 
         node.parent = None
         node.left = None
