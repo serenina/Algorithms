@@ -92,11 +92,11 @@ class BinarySearchTree:
 
             return self.search_helper(node.left, val)
 
-        elif val > node.val:
+        else:
             if node.right is None:
                 raise ValNotFoundException(val)
-            else:
-                return self.search_helper(node.right, val)
+
+            return self.search_helper(node.right, val)
 
     def delete(self, node):
         if node.parent is None:
