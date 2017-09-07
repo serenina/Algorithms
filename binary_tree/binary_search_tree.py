@@ -89,8 +89,9 @@ class BinarySearchTree:
         if val <= node.val:
             if node.left is None:
                 raise ValNotFoundException(val)
-            else:
-                return self.search_helper(node.left, val)
+
+            return self.search_helper(node.left, val)
+
         elif val > node.val:
             if node.right is None:
                 raise ValNotFoundException(val)

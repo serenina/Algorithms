@@ -34,16 +34,16 @@ class TestBinarySearchTree(object):
         b = BinarySearchTree()
 
         root = b.insert_value(10)
-        assert b.root == root
+        assert b.root is root
 
         a = b.insert_value(5)
-        assert b.root.left == a
+        assert b.root.left is a
 
         c = b.insert_value(11)
-        assert b.root.right == c
+        assert b.root.right is c
 
         d = b.insert_value(12)
-        assert d.parent == c
+        assert d.parent is c
 
         b.insert_value(3)
         b.insert_value(10)
@@ -75,7 +75,7 @@ class TestBinarySearchTree(object):
         b.insert_value(6)
 
         root_remove = b.delete(b.root)
-        assert root == root_remove
+        assert root is root_remove
 
         expected_result = [5, 3, 10, 6, 11, 12]
         assert b.tree_to_list(b.root) == expected_result
@@ -92,7 +92,7 @@ class TestBinarySearchTree(object):
         b.insert_value(6)
 
         node_to_remove_removed = b.delete(node_to_remove)
-        assert node_to_remove == node_to_remove_removed
+        assert node_to_remove is node_to_remove_removed
 
         expected_result = [10, 3, 10, 6, 11, 12]
         assert b.tree_to_list(b.root) == expected_result
