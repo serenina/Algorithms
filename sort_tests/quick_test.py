@@ -1,4 +1,4 @@
-from  sort.my_new_quick import quicksort
+from sort.my_new_quick import quicksort
 
 
 def test_merge():

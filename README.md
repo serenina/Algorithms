@@ -1,14 +1,28 @@
-the sort branch contains two folders, sort and test. In the sort ones there is a list of sorting functions:
+## Data Structures and Algorithms in Python
+This repo contains varoius algorithms written in python, from sorting to tree.
 
-- bubble sort
-- insert sort
-- merge sort
-- quick sort
+#### Data structures
+ 
+- Linked list
+- Stacks
+- Queues
 
-In the test folder there are tests for each of the sorting function. Sort functions are imported from the all_sort.py file
+#### Algorithms
 
-In order to run the tests you need to be in a vir env and use pytest as:
--  pytest test/ (it'll run all the tests at once)
--  pytest test/quick_test.py (to run a specific test)
+Sorting:
 
+- Bubble sort
+- Insert sort
+- Merge sort
+- Quick sort
 
+Binary tree 
+
+- Insert
+- Search
+- Delete
+- Inorder
+- Preorder
+
+is made of two classes,  TreeNode and BinarySearchTree.
+The BinarySearchTree contains methods as:

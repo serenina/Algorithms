@@ -1,4 +1,4 @@
-from  sort.my_merge2 import mergelists
+from sort.my_merge2 import mergelists
 
 
 def test_merge():

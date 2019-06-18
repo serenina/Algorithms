@@ -1,4 +1,4 @@
-from  sort.my_insert import insert_sort
+from sort.my_insert import insert_sort
 
 
 def test_insert():

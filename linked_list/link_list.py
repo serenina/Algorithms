@@ -42,8 +42,7 @@ class Node(object):
                 return self.get_next().search_item(item)
 
 
-
-class Loose_list(object):
+class LooseList(object):
     def __init__(self):
         self._head = None
         self.count = 0
@@ -82,6 +81,3 @@ class Loose_list(object):
                     previous.set_next(current.get_next())
             else:
                 previous = current
-
-
-
